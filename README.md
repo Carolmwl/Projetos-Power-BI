@@ -1,5 +1,7 @@
 # 🚚 Logistics Performance Dashboard
 
+![Dashboard Logística](dashboard-logistica.png)
+
 ## 📊 Visão Geral do Projeto
 Este projeto consiste em um dashboard estratégico de logística desenvolvido no **Power BI**, focado no monitoramento de eficiência de entregas e custos de transporte. 
 
