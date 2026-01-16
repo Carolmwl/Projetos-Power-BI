@@ -1,0 +1,16 @@
+relationship b5b50bb2-85e8-46dc-9d5f-1cd553ed43a2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Historico Transporte'.'Data de Coleta'
+	toColumn: LocalDateTable_a3de5866-bc5c-442b-8ede-4b712f1a7520.Date
+
+relationship 05a6ec3f-1c28-4ee5-b3ec-eda8426c124b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Historico Transporte'.'Data de Entrega'
+	toColumn: LocalDateTable_b82bc375-945e-4266-8e00-023fced705d1.Date
+
+relationship AutoDetected_e2333943-b520-4ed9-bbba-72f617c6622f
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Valor do Frete'.Load
+	toColumn: 'Historico Transporte'.Load
+

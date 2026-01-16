@@ -1,0 +1,22 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Historico Transporte","Valor do Frete"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'Historico Transporte'
+ref table DateTableTemplate_f776de93-2bd5-4a77-bd71-a1160c9ed081
+ref table LocalDateTable_a3de5866-bc5c-442b-8ede-4b712f1a7520
+ref table LocalDateTable_b82bc375-945e-4266-8e00-023fced705d1
+ref table 'Valor do Frete'
+
+ref cultureInfo pt-BR
+

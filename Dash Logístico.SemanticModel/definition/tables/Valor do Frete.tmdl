@@ -1,0 +1,53 @@
+table 'Valor do Frete'
+	lineageTag: cc83bc1c-cbf2-4409-83e6-1dd3d14c7111
+
+	column Load
+		dataType: int64
+		formatString: 0
+		lineageTag: a0373728-a46e-47a5-a3e7-3b7cbcaa2f65
+		summarizeBy: none
+		sourceColumn: Load
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo de Veículo'
+		dataType: string
+		lineageTag: 3406ec21-999d-4e3e-9d32-3765a91d45d3
+		summarizeBy: none
+		sourceColumn: Tipo de Veículo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Transporte'
+		dataType: string
+		lineageTag: 423d2ffb-8867-44cb-b714-91553afca949
+		summarizeBy: none
+		sourceColumn: Tipo Transporte
+
+		annotation SummarizationSetBy = Automatic
+
+	column ' Valor do Frete '
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: d0bbb10e-7eca-4ca1-9631-1293f6320602
+		summarizeBy: sum
+		sourceColumn: " Valor do Frete "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition 'Valor do Frete' = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\carol\OneDrive\Desktop\Imersão Power BI na Era da IA  - Karine\2025-Aula2_Imersao-PowerBI-IA\Valor do Frete.txt"),[Delimiter="	", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Load", Int64.Type}, {"Tipo de Veículo", type text}, {"Tipo Transporte", type text}, {" Valor do Frete ", Currency.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

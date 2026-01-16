@@ -1,0 +1,184 @@
+table 'Historico Transporte'
+	lineageTag: e4c17ee5-a6d9-45cd-a6a9-5e436b91b833
+
+	measure 'Total Viagens' = COUNTROWS('Historico Transporte')
+		formatString: 0
+		lineageTag: 2e1c8429-7ff4-4018-a064-a0490873fe42
+
+	measure 'Qtd no Prazo' =
+			
+			CALCULATE([Total Viagens],
+			'Historico Transporte'[Status Transporte] = "Dentro do Prazo")
+		formatString: 0
+		lineageTag: 8ea6ecee-e00f-4aa2-8728-d7f4e03c7497
+
+	measure '% OTD' = DIVIDE([Qtd no Prazo],[Total Viagens])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: def44de2-efb9-434d-ad35-9d8d8b388b7b
+
+	measure 'Meta OTD' = ```
+			0.80 
+			```
+		lineageTag: 257b5720-71a4-4f82-82fe-751ca7255f3d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Load
+		dataType: int64
+		formatString: 0
+		lineageTag: 488fbb14-5061-4dfb-a2ad-5095ee9c75d8
+		summarizeBy: none
+		sourceColumn: Load
+
+		annotation SummarizationSetBy = Automatic
+
+	column Transportadora
+		dataType: string
+		lineageTag: e971c5b0-ddc6-423a-ae36-00657b04e174
+		summarizeBy: none
+		sourceColumn: Transportadora
+
+		annotation SummarizationSetBy = Automatic
+
+	column Origem-Cidade
+		dataType: string
+		lineageTag: 04c5d7e7-3589-4579-b0c6-423653b18bf9
+		summarizeBy: none
+		sourceColumn: Origem-Cidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column Origem-UF
+		dataType: string
+		lineageTag: 8a0a4e07-c168-4587-998d-5ac528e692f5
+		summarizeBy: none
+		sourceColumn: Origem-UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column Destino-Cidade
+		dataType: string
+		lineageTag: 07f0ec6b-ded6-4203-859a-f0ed8492d79e
+		summarizeBy: none
+		sourceColumn: Destino-Cidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column Destino-UF
+		dataType: string
+		lineageTag: c5d2a1f3-0da3-4b32-a5c2-f13dbee7f311
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: Destino-UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Peso Bruto (kg)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 83a12e9b-c3c2-4817-bd0b-b4e0d99d4c51
+		summarizeBy: sum
+		sourceColumn: Peso Bruto (kg)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cubagem (m³)'
+		dataType: double
+		lineageTag: c2855e32-1308-46fc-b14d-408c24e42f7a
+		summarizeBy: sum
+		sourceColumn: Cubagem (m³)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Data de Coleta'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 91474855-0e22-4e9d-ba52-2437579dec79
+		summarizeBy: none
+		sourceColumn: Data de Coleta
+
+		variation Variation
+			isDefault
+			relationship: b5b50bb2-85e8-46dc-9d5f-1cd553ed43a2
+			defaultHierarchy: LocalDateTable_a3de5866-bc5c-442b-8ede-4b712f1a7520.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Data de Entrega'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7accb659-3b47-4bde-9f59-727565cda353
+		summarizeBy: none
+		sourceColumn: Data de Entrega
+
+		variation Variation
+			isDefault
+			relationship: 05a6ec3f-1c28-4ee5-b3ec-eda8426c124b
+			defaultHierarchy: LocalDateTable_b82bc375-945e-4266-8e00-023fced705d1.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Prazo Realizado (dias)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6703d57b-9594-4dba-bdf4-707b9aa10892
+		summarizeBy: sum
+		sourceColumn: Prazo Realizado (dias)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prazo Contratado (dias)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 784165f2-0d0d-4cbb-8e46-14f27eca4a6b
+		summarizeBy: sum
+		sourceColumn: Prazo Contratado (dias)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Status Transporte'
+		dataType: string
+		lineageTag: 7704fd8e-e3cf-4451-8369-53e59fb309f1
+		summarizeBy: none
+		sourceColumn: Status Transporte
+
+		annotation SummarizationSetBy = Automatic
+
+	column País = 'Historico Transporte'[Destino-UF]&", Brasil"
+		lineageTag: a8d49416-5f58-4078-9f4d-0af3c6daa438
+		dataCategory: Place
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Historico Transporte' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\carol\OneDrive\Desktop\Imersão Power BI na Era da IA  - Karine\2025-Aula2_Imersao-PowerBI-IA\Historico Transporte.xlsx"), null, true),
+				    Sheet1_Sheet = Fonte{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Histórico Transporte", type any}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type any}, {"Column7", type any}, {"Column8", type any}, {"Column9", type any}, {"Column10", type any}, {"Column11", type any}}),
+				    #"Linhas Superiores Removidas" = Table.Skip(#"Tipo Alterado",2),
+				    #"Cabeçalhos Promovidos1" = Table.PromoteHeaders(#"Linhas Superiores Removidas", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos1",{{"Load", Int64.Type}, {"Transportadora", type text}, {"Origem-Cidade", type text}, {"Origem-UF", type text}, {"Destino", type text}, {"Peso Bruto (kg)", Int64.Type}, {"Cubagem (m³)", type number}, {"Data de Coleta", type date}, {"Data de Entrega", type date}, {"Prazo Realizado (dias)", Int64.Type}, {"Prazo Contratado (dias)", Int64.Type}}),
+				    #"Dividir Coluna por Delimitador" = Table.SplitColumn(#"Tipo Alterado1", "Destino", Splitter.SplitTextByDelimiter(",", QuoteStyle.Csv), {"Destino.1", "Destino.2"}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Dividir Coluna por Delimitador",{{"Destino.1", type text}, {"Destino.2", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado2",{{"Destino.1", "Destino-Cidade"}, {"Destino.2", "Destino-UF"}}),
+				    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Colunas Renomeadas", "Status Transporte", each if [#"Prazo Realizado (dias)"] >= [#"Prazo Contratado (dias)"] then "Dentro do Prazo" else "Atraso"),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Coluna Condicional Adicionada",{"Status Transporte"}),
+				    #"Coluna Condicional Adicionada1" = Table.AddColumn(#"Colunas Removidas", "Status Transporte", each if [#"Prazo Realizado (dias)"] <= [#"Prazo Contratado (dias)"] then "Dentro do Prazo" else "Atraso"),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Coluna Condicional Adicionada1",{{"Status Transporte", type text}})
+				in
+				    #"Tipo Alterado3"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
