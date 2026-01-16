@@ -1,11 +1,11 @@
 # 🚚 Logistics Performance Dashboard
 
-![Dashboard Logística](dashboard-logistica.png)
-
 ## 📊 Visão Geral do Projeto
 Este projeto consiste em um dashboard estratégico de logística desenvolvido no **Power BI**, focado no monitoramento de eficiência de entregas e custos de transporte. 
 
 O objetivo principal desta solução é fornecer uma visão 360º da operação logística, permitindo que gestores identifiquem gargalos regionais, controlem o orçamento de frete e monitorem a qualidade do serviço através do indicador OTD (On Time Delivery).
+
+![Dashboard Logística](dashboard-logistica.png)
 
 ## 🎯 Problema de Negócio e Solução
 A gestão logística enfrentava desafios para visualizar de forma consolidada o desempenho das transportadoras e o custo total por região. Este painel soluciona o problema centralizando dados críticos para responder a perguntas como:
