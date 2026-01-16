@@ -39,7 +39,11 @@ O dashboard monitora indicadores fundamentais para a cadeia de suprimentos:
 ## 🚀 Como Executar o Projeto
 1. Clone este repositório.
 2. Abra o arquivo `.pbix` no Microsoft Power BI Desktop.
-3. A base de dados fictícia está anexa na pasta `dados` (se aplicável).
+3. A base de dados fictícia está anexa na pasta `dados`.
+
+<a href="./Dashboard-Logistica.pbix">
+  <img src="https://img.shields.io/badge/Download-Arquivo_.pbix-F2C811?style=for-the-badge&logo=microsoftpowerbi&logoColor=black">
+</a>
 
 ---
 *Desenvolvido por [Caroline Mann Wharton Luzio](https://www.linkedin.com/in/caroline-mann-wharton-luzio/)*
