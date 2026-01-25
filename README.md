@@ -36,13 +36,10 @@ O dashboard monitora indicadores fundamentais para a cadeia de suprimentos:
 * **Visualização Geográfica:** Mapa de calor da malha logística por cidade de origem.
 * **Tooltips Personalizados:** Detalhamento ao passar o mouse sobre os gráficos.
 
-## 🚀 Como Executar o Projeto
-1. Clone este repositório.
-2. Abra o arquivo `.pbix` no Microsoft Power BI Desktop.
-3. A base de dados fictícia está anexa na pasta `dados`.
+## 🚀 Como Interagir com o Projeto 
 
-<a href="./Dashboard-Logistica.pbix">
-  <img src="https://img.shields.io/badge/Download-Arquivo_.pbix-F2C811?style=for-the-badge&logo=microsoftpowerbi&logoColor=black">
+<a href="https://app.powerbi.com/view?r=eyJrIjoiNDlhZjE2ODQtZTYyYy00M2EwLWEzMWEtODAxMzhjZThhYWU5IiwidCI6IjM4MzYyNjc3LTY2OTQtNDk5OS1hNDA4LTMxYjAwYjIyNGZlMCJ9" target="_blank">
+    <img src="https://img.shields.io/badge/Visualizar%20Dashboard-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" alt="Ver Dashboard no Power BI">
 </a>
 
 ---
